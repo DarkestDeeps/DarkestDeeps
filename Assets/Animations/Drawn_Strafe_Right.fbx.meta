@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a3a23b220e5c48d46b3f85a24b2e49a2
-timeCreated: 1453144821
+guid: 1ea4c1326e840bd429b1e0ba4127e476
+timeCreated: 1453247128
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -63,7 +63,7 @@ ModelImporter:
     7400000: PlayerRig|Empty
     7400002: PlayerRig|Swing1
     7400004: Character|Empty
-    7400006: Drawn_Strafe
+    7400006: Drawn_Strafe_Right
     9500000: //RootNode
     13700000: Character
   materials:
@@ -87,10 +87,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Drawn_Strafe
+      name: Drawn_Strafe_Right
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 34
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -101,7 +101,7 @@ ModelImporter:
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -113,7 +113,7 @@ ModelImporter:
       - path: 
         weight: 1
       - path: Character
-        weight: 1
+        weight: 0
       - path: PlayerRig
         weight: 1
       - path: PlayerRig/hips
@@ -127,7 +127,7 @@ ModelImporter:
       - path: PlayerRig/hips/spine/chest/neck/head
         weight: 1
       - path: PlayerRig/hips/spine/chest/neck/head/head_end
-        weight: 1
+        weight: 0
       - path: PlayerRig/hips/spine/chest/shoulder.L
         weight: 1
       - path: PlayerRig/hips/spine/chest/shoulder.L/upper_arm.L
@@ -137,7 +137,7 @@ ModelImporter:
       - path: PlayerRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L
         weight: 1
       - path: PlayerRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/hand.L_end
-        weight: 1
+        weight: 0
       - path: PlayerRig/hips/spine/chest/shoulder.R
         weight: 1
       - path: PlayerRig/hips/spine/chest/shoulder.R/upper_arm.R
@@ -147,7 +147,7 @@ ModelImporter:
       - path: PlayerRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R
         weight: 1
       - path: PlayerRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/hand.R_end
-        weight: 1
+        weight: 0
       - path: PlayerRig/hips/thigh.L
         weight: 1
       - path: PlayerRig/hips/thigh.L/shin.L
@@ -155,7 +155,7 @@ ModelImporter:
       - path: PlayerRig/hips/thigh.L/shin.L/foot.L
         weight: 1
       - path: PlayerRig/hips/thigh.L/shin.L/foot.L/foot.L_end
-        weight: 1
+        weight: 0
       - path: PlayerRig/hips/thigh.R
         weight: 1
       - path: PlayerRig/hips/thigh.R/shin.R
@@ -163,7 +163,7 @@ ModelImporter:
       - path: PlayerRig/hips/thigh.R/shin.R/foot.R
         weight: 1
       - path: PlayerRig/hips/thigh.R/shin.R/foot.R/foot.R_end
-        weight: 1
+        weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
     isReadable: 1
@@ -346,7 +346,7 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Drawn_Strafe(Clone)
+    - name: Drawn_Strafe_Right(Clone)
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}

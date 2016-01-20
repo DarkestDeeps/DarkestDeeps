@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 9f6152de50d9f7f48ab36670bce1092b
-timeCreated: 1453147109
+guid: 3f1b6b28ad3148648b1f0d0652dfa88f
+timeCreated: 1453246648
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Character
-    100004: chest
+    100000: Character
+    100002: chest
+    100004: //RootNode
     100006: foot.L
     100008: foot.L_end
     100010: foot.R
@@ -32,9 +32,9 @@ ModelImporter:
     100048: thigh.R
     100050: upper_arm.L
     100052: upper_arm.R
-    400000: //RootNode
-    400002: Character
-    400004: chest
+    400000: Character
+    400002: chest
+    400004: //RootNode
     400006: foot.L
     400008: foot.L_end
     400010: foot.R
@@ -63,7 +63,7 @@ ModelImporter:
     7400000: PlayerRig|Empty
     7400002: PlayerRig|Swing1
     7400004: Character|Empty
-    7400006: Attack_Spin
+    7400006: Drawn_Strafe_Left
     9500000: //RootNode
     13700000: Character
   materials:
@@ -87,23 +87,23 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Attack_Spin
+      name: Drawn_Strafe_Left
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 39
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -346,7 +346,7 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Attack_Spin(Clone)
+    - name: Drawn_Strafe_Left(Clone)
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}

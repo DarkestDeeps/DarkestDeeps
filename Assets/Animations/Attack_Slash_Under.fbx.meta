@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9f6152de50d9f7f48ab36670bce1092b
-timeCreated: 1453147109
+guid: 00ec9e1b163ad8241b10ba9a4751d26a
+timeCreated: 1453305929
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -63,7 +63,7 @@ ModelImporter:
     7400000: PlayerRig|Empty
     7400002: PlayerRig|Swing1
     7400004: Character|Empty
-    7400006: Attack_Spin
+    7400006: Attack_Slash_OffHand
     9500000: //RootNode
     13700000: Character
   materials:
@@ -79,7 +79,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 0
+    animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -87,10 +87,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Attack_Spin
+      name: Attack_Slash_OffHand
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 39
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -103,7 +103,7 @@ ModelImporter:
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -346,7 +346,7 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Attack_Spin(Clone)
+    - name: Attack_Slash_Under(Clone)
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
