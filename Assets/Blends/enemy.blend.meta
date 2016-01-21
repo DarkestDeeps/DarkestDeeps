@@ -6,12 +6,57 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Character
+    100004: chest
+    100006: foot_L
+    100008: foot_R
+    100010: forearm_L
+    100012: forearm_R
+    100014: hand_L
+    100016: hand_R
+    100018: head
+    100020: hips
+    100022: neck
+    100024: PlayerRig
+    100026: shin_L
+    100028: shin_R
+    100030: shoulder_L
+    100032: shoulder_R
+    100034: spine
+    100036: thigh_L
+    100038: thigh_R
+    100040: upper_arm_L
+    100042: upper_arm_R
     400000: //RootNode
+    400002: Character
+    400004: chest
+    400006: foot_L
+    400008: foot_R
+    400010: forearm_L
+    400012: forearm_R
+    400014: hand_L
+    400016: hand_R
+    400018: head
+    400020: hips
+    400022: neck
+    400024: PlayerRig
+    400026: shin_L
+    400028: shin_R
+    400030: shoulder_L
+    400032: shoulder_R
+    400034: spine
+    400036: thigh_L
+    400038: thigh_R
+    400040: upper_arm_L
+    400042: upper_arm_R
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cube
+    4300002: Character
     7400000: Default Take
+    7400002: Swing1
     9500000: //RootNode
+    13700000: Character
   materials:
     importMaterials: 1
     materialName: 0
