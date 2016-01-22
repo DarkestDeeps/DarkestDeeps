@@ -15,12 +15,24 @@ public class Player : MonoBehaviour {
 
 	public State currentState;
 
+    //MY CODE REMOVE HERE IF YOU WANT
+        public AudioClip hyah1;
+        public AudioClip hyah2;
+        public AudioClip hyah3;
+
+        private AudioSource source;
+    //
+
 	void Start() {
 		anim = gameObject.GetComponent<Animator>();
 		mainCam = Camera.main;
 		targetTracker = gameObject.GetComponentInChildren<EnemyTargeting> ();
 		currentState = State.Passive;
         dashing = false;
+
+        //MY CODE
+            source = GetComponent<AudioSource>();
+        //
 	}
 	
 	void Update() {
@@ -67,6 +79,19 @@ public class Player : MonoBehaviour {
             else
             {
                 dashing = false;
+
+                //MY CODE REMOVE IT HERE IF YOU WANT TO GET RID OF IT
+                    float eyy; //eyyyyy
+                    eyy = Random.Range(0,3);
+                    if (eyy < 1) {
+                        source.PlayOneShot(hyah1, (Random.Range(2.0f,3.0f)));
+                    } else if (eyy >= 1 && eyy < 2) {
+                        source.PlayOneShot(hyah2, (Random.Range(2.0f, 3.0f)));
+                    } else {
+                        source.PlayOneShot(hyah2, (Random.Range(2.0f, 3.0f)));
+                    }
+                //AHAHAHAHAHHAHA HYAHHH HYAH HYAH HYAH HAAAH HYAAAH
+
                 anim.SetBool("Attacking", true);
                 anim.SetInteger("AttackChoice", Random.Range(0, 2));
                 anim.SetTrigger("Attack");
