@@ -83,6 +83,7 @@ public class Player : MonoBehaviour {
                 //MY CODE REMOVE IT HERE IF YOU WANT TO GET RID OF IT
                     float eyy; //eyyyyy
                     eyy = Random.Range(0,3);
+                    source.pitch = Random.Range(0.95f,1.05f);
                     if (eyy < 1) {
                         source.PlayOneShot(hyah1, (Random.Range(2.0f,3.0f)));
                     } else if (eyy >= 1 && eyy < 2) {

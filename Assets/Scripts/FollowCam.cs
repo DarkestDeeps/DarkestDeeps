@@ -17,6 +17,7 @@ public class FollowCam : MonoBehaviour {
 	private Vector3 offset;
 	private bool eyy;
     private float dist = 5.0f;
+    private bool collided; //For detecting if there are collisions on the camera
 
 	void Start() {
 		offset = new Vector3(target.transform.position.x, target.transform.position.y-15, target.transform.position.z+10);
@@ -82,4 +83,16 @@ public class FollowCam : MonoBehaviour {
 		transform.rotation = rotation;
 		
 	}
+
+    void OnCollisionEnter(Collision coll) {//If You collide with an object
+        if(coll.collider.gameObject.layer == LayerMask.NameToLayer("Default")){
+            collided = true;
+            Debug.Log("touchy touchy");
+        }
+    }
+
+    void OnCollisionExit(Collision coll) {//If you are no longer colliding with an object
+        collided = false;
+        Debug.Log("We outty");
+    }
 }
