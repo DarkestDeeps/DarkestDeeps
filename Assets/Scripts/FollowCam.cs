@@ -74,22 +74,31 @@ public class FollowCam : MonoBehaviour {
 		
 		dist = Mathf.Clamp(dist - Input.GetAxis("Mouse ScrollWheel") * 5, distanceMin, distance);
 
-        Vector3 velocity = Vector3.zero;
+		Vector3 velocity = Vector3.zero;
 		Vector3 position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.transform.position;
 
-        transform.position = position;
+		transform.position = position;
 		transform.rotation = rotation;
-		
+				
 	}
 
-    void OnCollisionEnter(Collision coll) {//If You collide with an object
-        if(coll.collider.gameObject.layer == LayerMask.NameToLayer("Default")){
+    void OnTriggerEnter(Collider coll) {//If You collide with an object
+        if (coll.GetComponent<Collider>().gameObject.layer == LayerMask.NameToLayer("Default")) {
             collided = true;
             Debug.Log("touchy touchy");
         }
+        /*
+         * 
+         * 
+         * transform.position = Vector3.Slerp((transform.position - target.transform.position), offset, 1.0f);
+         * 
+         * 
+         * 
+         * 
+        */
     }
 
-    void OnCollisionExit(Collision coll) {//If you are no longer colliding with an object
+    void OnTriggerExit(Collider coll) {//If you are no longer colliding with an object
         collided = false;
         Debug.Log("We outty");
     }
