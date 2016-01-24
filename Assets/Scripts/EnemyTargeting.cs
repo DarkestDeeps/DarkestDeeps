@@ -24,8 +24,8 @@ public class EnemyTargeting : MonoBehaviour {
 		return enemyList[0];
 	}
 
-	public Transform getEnemyPosition(GameObject enemy) {
-		return enemy.transform;
+	public Vector3 getEnemyPosition() {
+        return getTargetEnemy().transform.position;
 	}
 
 	public int getEnemyCount() {

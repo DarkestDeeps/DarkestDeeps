@@ -24,8 +24,6 @@ public class FollowCam : MonoBehaviour {
         transform.LookAt(target.transform);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-		player = GameObject.FindGameObjectWithTag ("Player").GetComponent<Player>();
-		playerTargetSphere = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<EnemyTargeting>();
         eyy = true;
 	}
 
@@ -63,7 +61,7 @@ public class FollowCam : MonoBehaviour {
         Vector3 newPos = attackTarget.transform.position + (-attackTarget.transform.forward * 2.25f);
         transform.position = Vector3.SmoothDamp(transform.position, newPos, ref velocity, 0.07f);
         transform.rotation = rotation;
-        transform.LookAt(new Vector3(playerTargetSphere.getEnemyPosition(playerTargetSphere.getTargetEnemy()).position.x, attackTarget.transform.position.y, playerTargetSphere.getEnemyPosition(playerTargetSphere.getTargetEnemy()).position.z));
+        transform.LookAt(new Vector3(playerTargetSphere.getEnemyPosition().x, attackTarget.transform.position.y, playerTargetSphere.getEnemyPosition().z));
 		
 	}
 	

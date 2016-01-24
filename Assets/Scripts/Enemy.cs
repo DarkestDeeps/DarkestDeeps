@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-	GameObject player;
+	public GameObject player;
 	Rigidbody rigid;
     Animator anim;
 
@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-		player = GameObject.FindGameObjectWithTag ("Player");
 		rigid = gameObject.GetComponent<Rigidbody> ();
         anim = gameObject.GetComponent<Animator>();
 	}
