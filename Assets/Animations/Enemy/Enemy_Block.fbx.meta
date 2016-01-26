@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: eca7125ae5d3c0a479ae0cdc9571f2d6
-timeCreated: 1453473017
+guid: 95a47ff2a37e5644ca67b2a70edd28de
+timeCreated: 1453757290
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -63,7 +63,7 @@ ModelImporter:
     7400000: PlayerRig|Empty
     7400002: PlayerRig|Swing1
     7400004: Character|Empty
-    7400006: Enemy_Attack
+    7400006: Enemy_Defend
     9500000: //RootNode
     13700000: Character
   materials:
@@ -87,20 +87,20 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Enemy_Attack
+      name: Enemy_Defend
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 79
+      lastFrame: 55
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -113,7 +113,7 @@ ModelImporter:
       - path: 
         weight: 1
       - path: Character
-        weight: 1
+        weight: 0
       - path: PlayerRig
         weight: 1
       - path: PlayerRig/hips
@@ -127,7 +127,7 @@ ModelImporter:
       - path: PlayerRig/hips/spine/chest/neck/head
         weight: 1
       - path: PlayerRig/hips/spine/chest/neck/head/head_end
-        weight: 1
+        weight: 0
       - path: PlayerRig/hips/spine/chest/shoulder.L
         weight: 1
       - path: PlayerRig/hips/spine/chest/shoulder.L/upper_arm.L
@@ -137,7 +137,7 @@ ModelImporter:
       - path: PlayerRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L
         weight: 1
       - path: PlayerRig/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/hand.L_end
-        weight: 1
+        weight: 0
       - path: PlayerRig/hips/spine/chest/shoulder.R
         weight: 1
       - path: PlayerRig/hips/spine/chest/shoulder.R/upper_arm.R
@@ -147,7 +147,7 @@ ModelImporter:
       - path: PlayerRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R
         weight: 1
       - path: PlayerRig/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/hand.R_end
-        weight: 1
+        weight: 0
       - path: PlayerRig/hips/thigh.L
         weight: 1
       - path: PlayerRig/hips/thigh.L/shin.L
@@ -155,7 +155,7 @@ ModelImporter:
       - path: PlayerRig/hips/thigh.L/shin.L/foot.L
         weight: 1
       - path: PlayerRig/hips/thigh.L/shin.L/foot.L/foot.L_end
-        weight: 1
+        weight: 0
       - path: PlayerRig/hips/thigh.R
         weight: 1
       - path: PlayerRig/hips/thigh.R/shin.R
@@ -163,7 +163,7 @@ ModelImporter:
       - path: PlayerRig/hips/thigh.R/shin.R/foot.R
         weight: 1
       - path: PlayerRig/hips/thigh.R/shin.R/foot.R/foot.R_end
-        weight: 1
+        weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
     isReadable: 1
@@ -346,7 +346,7 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Enemy_Attack(Clone)
+    - name: Enemy_Block(Clone)
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}

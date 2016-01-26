@@ -14,13 +14,20 @@ public class Player : MonoBehaviour {
     private float v;
 
 	public enum State {Passive, Attacking};
+    public enum Intent { INTENT_ATTACK_LIGHT, INTENT_ATTACK_STRONG, INTENT_CHARGE, INTENT_BLOCK, INTENT_DODGE, INTENT_STRAFE, INTENT_BACKOFF, INTENT_IDLE, INTENT_APPROACH };
 
 	public State currentState;
+
+    private bool attacking;
+
+    private Weapon heldWeapon;
 
 	void Start() {
 		anim = gameObject.GetComponent<Animator>();
 		mainCam = Camera.main;
 		targetTracker = gameObject.GetComponentInChildren<EnemyTargeting> ();
+        attacking = false;
+        heldWeapon = gameObject.GetComponentInChildren<Weapon>();
 	}
 	
 	void Update() {
@@ -53,7 +60,7 @@ public class Player : MonoBehaviour {
         anim.SetInteger("H_Dir", (int)h);
         anim.SetInteger("V_Dir", (int)v);
 
-        if (Input.GetKey("w"))
+        if (v == 1)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -130,5 +137,15 @@ public class Player : MonoBehaviour {
     {
             anim.SetInteger("AttackChoice", Random.Range(0, 2));
             anim.SetTrigger("Attack");
+    }
+
+    public bool isAttacking()
+    {
+        return attacking;
+    }
+
+    public void setAttackStatus(int status)
+    {
+        attacking = status == 0 ? false : true;
     }
 }
