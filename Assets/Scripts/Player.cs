@@ -14,11 +14,17 @@ public class Player : MonoBehaviour {
     private float v;
 
 	public enum State {Passive, Attacking};
-    public enum Intent { INTENT_ATTACK_LIGHT, INTENT_ATTACK_STRONG, INTENT_CHARGE, INTENT_BLOCK, INTENT_DODGE, INTENT_STRAFE, INTENT_BACKOFF, INTENT_IDLE, INTENT_APPROACH };
+    public enum Intent { 
+        INTENT_ATTACK_LIGHT = 0, 
+        INTENT_CHARGE = 1, 
+        INTENT_BLOCK =2, 
+        INTENT_STRAFE = 3, 
+        INTENT_IDLE = 4};
 
 	public State currentState;
 
     private bool attacking;
+    private Intent playerIntent;
 
     private Weapon heldWeapon;
 
@@ -147,5 +153,10 @@ public class Player : MonoBehaviour {
     public void setAttackStatus(int status)
     {
         attacking = status == 0 ? false : true;
+    }
+
+    public void setIntent(int intent)
+    {
+        targetTracker.broadcastIntent((Intent)intent);
     }
 }

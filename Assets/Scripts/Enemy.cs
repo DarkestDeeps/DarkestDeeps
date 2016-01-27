@@ -7,8 +7,22 @@ public class Enemy : MonoBehaviour {
 	Rigidbody rigid;
     Animator anim;
 
+    public enum Personality { Defensive, Offensive };
+    public enum IntelligenceLevel { High, Moderate, Low };
+
+    public Personality enemyPersonality;
+    public IntelligenceLevel intelligence;
+
+    /*Player.Intent[,] defensiveReactions = new Player.Intent[,] {
+    {Player.Intent.INTENT_ATTACK_LIGHT, Player.Intent.INTENT_BLOCK},
+    {Player.Intent.INTENT_CHARGE, Player.Intent.INTENT_BLOCK},
+    {Player.Intent.INTENT_IDLE, Player.Intent.INTENT_ATTACK_LIGHT},
+    {Player.Intent.INTENT_STRAFE, Player.Intent.INTENT_STRAFE}};*/
+
     public float health;
     public float attack;
+
+    public bool reactionChosen;
 
     private enum State
     {
@@ -35,12 +49,10 @@ public class Enemy : MonoBehaviour {
         else if (checkState() == State.STATE_ATTACK)
         {
             anim.SetBool("Chasing", false);
-            attackTarget();
         }
         else
         {
             anim.SetBool("Chasing", false);
-            //Do nothing
         }
 	}
 
@@ -82,5 +94,23 @@ public class Enemy : MonoBehaviour {
     private void lookAtPlayer()
     {
         transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+    }
+
+    public static float calcAttack(int smrt, int hp, float rage)
+    {
+        float intent = (smrt / (20 / hp) + (rage * 5));
+        return intent;
+    }
+
+    public void receiveIntent(Player.Intent intent)
+    {
+        if (intent == Player.Intent.INTENT_ATTACK_LIGHT)
+        {
+            anim.SetInteger("Reaction", 2);
+        }
+        if (intent == Player.Intent.INTENT_IDLE)
+        {
+            anim.SetInteger("Reaction", 4);
+        }
     }
 }

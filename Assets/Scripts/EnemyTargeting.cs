@@ -31,4 +31,11 @@ public class EnemyTargeting : MonoBehaviour {
 	public int getEnemyCount() {
 		return enemyList.Count;
 	}
+
+    public void broadcastIntent(Player.Intent intent)
+    {
+        Enemy enemy = getTargetEnemy().GetComponent<Enemy>();
+        //yield return StartCoroutine(Utilities.WaitForFrames(60));
+        enemy.receiveIntent(intent);
+    }
 }
