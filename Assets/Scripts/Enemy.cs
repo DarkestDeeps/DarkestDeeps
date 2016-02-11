@@ -3,21 +3,16 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-	public GameObject player;
+	public GameObject playerObject;
 	Rigidbody rigid;
     Animator anim;
+    Player player;
 
     public enum Personality { Defensive, Offensive };
     public enum IntelligenceLevel { High, Moderate, Low };
 
     public Personality enemyPersonality;
     public IntelligenceLevel intelligence;
-
-    /*Player.Intent[,] defensiveReactions = new Player.Intent[,] {
-    {Player.Intent.INTENT_ATTACK_LIGHT, Player.Intent.INTENT_BLOCK},
-    {Player.Intent.INTENT_CHARGE, Player.Intent.INTENT_BLOCK},
-    {Player.Intent.INTENT_IDLE, Player.Intent.INTENT_ATTACK_LIGHT},
-    {Player.Intent.INTENT_STRAFE, Player.Intent.INTENT_STRAFE}};*/
 
     public float health;
     public float attack;
@@ -33,7 +28,8 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
+        player = playerObject.GetComponent<Player>();
 		rigid = gameObject.GetComponent<Rigidbody> ();
         anim = gameObject.GetComponent<Animator>();
 	}
@@ -61,13 +57,21 @@ public class Enemy : MonoBehaviour {
 		if (hitObject.tag == "PlayerWeapon") {
             Weapon hitWeapon = hitObject.GetComponent<Weapon>();
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("React")) { 
-                anim.SetTrigger("Hit");
-                health = health - hitWeapon.getDamage();
-                if (health <= 0)
-                {
-                    anim.SetTrigger("Dead");
-                    Destroy(this);
+                 if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Defend")) {
+                    anim.SetTrigger("Hit");
+                    health = health - hitWeapon.getDamage();
+                    Debug.Log("Hit!");
+                    if (health <= 0)
+                    {
+                        anim.SetTrigger("Dead");
+                        Destroy(this);
+                    }
                 }
+                 else
+                 {
+                     health = health - (hitWeapon.getDamage() / 2);
+                     Debug.Log("Blocked!");
+                 }
             }
 		}
 	}
@@ -79,8 +83,8 @@ public class Enemy : MonoBehaviour {
 
     private State checkState() 
     {
-        if ((transform.position - player.transform.position).sqrMagnitude < 50) {
-            if ((transform.position - player.transform.position).sqrMagnitude < 1.5f) {
+        if ((transform.position - playerObject.transform.position).sqrMagnitude < 50) {
+            if ((transform.position - playerObject.transform.position).sqrMagnitude < 1.5f) {
                 return State.STATE_ATTACK;
             }
             return State.STATE_CHASE;
@@ -93,18 +97,22 @@ public class Enemy : MonoBehaviour {
 
     private void lookAtPlayer()
     {
-        transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+        transform.LookAt(new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z));
     }
 
     public static float calcAttack(int smrt, int hp, float rage)
     {
         float intent = (smrt / (20 / hp) + (rage * 5));
         return intent;
-    }
+    }  
 
     public void receiveIntent(Player.Intent intent)
     {
         if (intent == Player.Intent.INTENT_ATTACK_LIGHT)
+        {
+            anim.SetInteger("Reaction", 2);
+        }
+        if (intent == Player.Intent.INTENT_CHARGE)
         {
             anim.SetInteger("Reaction", 2);
         }

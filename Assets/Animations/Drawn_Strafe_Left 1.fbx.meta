@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 00ec9e1b163ad8241b10ba9a4751d26a
-timeCreated: 1453305929
+guid: b9a662fa665d36144b6ba74ef4e2e330
+timeCreated: 1455034467
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Character
-    100004: chest
+    100000: Character
+    100002: chest
+    100004: //RootNode
     100006: foot.L
     100008: foot.L_end
     100010: foot.R
@@ -32,9 +32,9 @@ ModelImporter:
     100048: thigh.R
     100050: upper_arm.L
     100052: upper_arm.R
-    400000: //RootNode
-    400002: Character
-    400004: chest
+    400000: Character
+    400002: chest
+    400004: //RootNode
     400006: foot.L
     400008: foot.L_end
     400010: foot.R
@@ -63,7 +63,7 @@ ModelImporter:
     7400000: PlayerRig|Empty
     7400002: PlayerRig|Swing1
     7400004: Character|Empty
-    7400006: Attack_Slash_OffHand
+    7400006: Drawn_Strafe_Right
     9500000: //RootNode
     13700000: Character
   materials:
@@ -79,7 +79,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 3
+    animationCompression: 0
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -87,16 +87,16 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Attack_Slash_OffHand
+      name: Drawn_Strafe_Right
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 50
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -105,18 +105,10 @@ ModelImporter:
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
-      mirror: 0
+      mirror: 1
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0
-        functionName: setIntent
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 43c8b1808cc5f95489b3f84cf93190fe,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask:
       - path: 
         weight: 1
@@ -354,7 +346,7 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Attack_Slash_Under(Clone)
+    - name: Drawn_Strafe_Left(Clone)
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}

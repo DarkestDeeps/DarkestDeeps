@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : Entity {
 	
 	public float movementSpeed = 10;
 	public float turningSpeed = 120;
 
-	private Animator anim;
 	private Camera mainCam;
 	private EnemyTargeting targetTracker;
 
     private float h;
     private float v;
+
+    private float health;
 
 	public enum State {Passive, Attacking};
     public enum Intent { 
@@ -29,7 +30,6 @@ public class Player : MonoBehaviour {
     private Weapon heldWeapon;
 
 	void Start() {
-		anim = gameObject.GetComponent<Animator>();
 		mainCam = Camera.main;
 		targetTracker = gameObject.GetComponentInChildren<EnemyTargeting> ();
         attacking = false;
@@ -58,13 +58,24 @@ public class Player : MonoBehaviour {
 
 		GameObject enemy = targetTracker.getTargetEnemy();
 
-		Vector3 targetPostition = new Vector3( enemy.transform.position.x, transform.position.y, enemy.transform.position.z ) ;
+		Vector3 targetPostition = new Vector3(enemy.transform.position.x, transform.position.y, enemy.transform.position.z ) ;
 		transform.LookAt( targetPostition ) ;
 
         transform.LookAt(targetPostition);
 
-        anim.SetInteger("H_Dir", (int)h);
-        anim.SetInteger("V_Dir", (int)v);
+        orbitTarget(enemy.transform, h);
+
+        switch ((int)v) {
+            case 1:
+                run(true, 2, Entity.Direction.Forward);
+                break;
+            case 0:
+                run(false, 2, Entity.Direction.None);
+                break;
+            case -1:
+                run(true, 2, Entity.Direction.Backward);
+                break;
+        }
 
         if (v == 1)
         {
@@ -94,9 +105,9 @@ public class Player : MonoBehaviour {
 		}
 		
 		if (h != 0 || v != 0) {
-			anim.SetBool ("Running", true);
+            run(true, 1, Entity.Direction.Forward);
 		} else {
-			anim.SetBool ("Running", false);
+            run(false, 1, Entity.Direction.Forward);
 		}
 
 	}
@@ -145,6 +156,11 @@ public class Player : MonoBehaviour {
             anim.SetTrigger("Attack");
     }
 
+    public void takeDamage(float damage)
+    {
+        health -= damage;
+    }
+
     public bool isAttacking()
     {
         return attacking;
@@ -158,5 +174,13 @@ public class Player : MonoBehaviour {
     public void setIntent(int intent)
     {
         targetTracker.broadcastIntent((Intent)intent);
+    }
+
+    void OnTriggerEnter(Collider hitObject) {
+        if (hitObject.tag == "EnemyWeapon") {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("React")) { 
+                anim.SetTrigger("Hit");
+            }
+        }
     }
 }

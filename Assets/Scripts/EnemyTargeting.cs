@@ -35,7 +35,6 @@ public class EnemyTargeting : MonoBehaviour {
     public void broadcastIntent(Player.Intent intent)
     {
         Enemy enemy = getTargetEnemy().GetComponent<Enemy>();
-        //yield return StartCoroutine(Utilities.WaitForFrames(60));
         enemy.receiveIntent(intent);
     }
 }

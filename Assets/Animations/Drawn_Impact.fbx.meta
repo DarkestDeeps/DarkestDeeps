@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1ea4c1326e840bd429b1e0ba4127e476
-timeCreated: 1453247128
+guid: dae1c6bbc3abe0d44b0ef4c43bc360e9
+timeCreated: 1454453443
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -63,7 +63,7 @@ ModelImporter:
     7400000: PlayerRig|Empty
     7400002: PlayerRig|Swing1
     7400004: Character|Empty
-    7400006: Drawn_Strafe_Right
+    7400006: Drawn_Impact
     9500000: //RootNode
     13700000: Character
   materials:
@@ -79,7 +79,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 3
+    animationCompression: 0
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -87,16 +87,16 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Drawn_Strafe_Right
+      name: Drawn_Impact
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 21
+      lastFrame: 29
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -346,7 +346,7 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Drawn_Strafe_Right(Clone)
+    - name: Drawn_Impact(Clone)
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}

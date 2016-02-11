@@ -108,7 +108,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: setIntent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 43c8b1808cc5f95489b3f84cf93190fe,
+          type: 3}
+        floatParameter: 0
+        intParameter: 4
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
