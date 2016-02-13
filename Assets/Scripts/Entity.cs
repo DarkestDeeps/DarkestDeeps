@@ -66,27 +66,28 @@ public class Entity : MonoBehaviour {
             anim.SetBool("RunForward", false);
             anim.SetBool("RunBackward", false);
 
-            if (speed > 0)
+            if (speed < 0.5f && speed > -0.5)
+            {
+                speed = 0;
+            }
+            else if (speed > 0.5)
             {
                 speed = speed - deceleration * Time.deltaTime;
                 transform.position += transform.forward * speed * Time.deltaTime;
+                Debug.Log("Above" + speed);
             }
-            else if (speed < 0)
+            else if (speed < -0.5)
             {
                 speed = speed + deceleration * Time.deltaTime;
                 transform.position += transform.forward * speed * Time.deltaTime;
+                Debug.Log("Below" + speed);
             }
         }
     }
 
-    public void runBackward()
-    {
-
-    }
-
     public void orbitTarget(Transform target, float direction)
     {
-        anim.SetInteger("Strafe", (int)direction);
+        anim.SetBool("Strafe", true);
 
         transform.RotateAround(target.transform.position, Vector3.up, -20 * direction / 14);
     }
