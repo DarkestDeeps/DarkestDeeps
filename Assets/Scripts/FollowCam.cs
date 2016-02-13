@@ -71,12 +71,15 @@ public class FollowCam : MonoBehaviour {
 		y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
 		
 		Quaternion rotation = Quaternion.Euler(y, x, 0);
-		
-		dist = Mathf.Clamp(dist - Input.GetAxis("Mouse ScrollWheel") * 5, distanceMin, distance);
+		Vector3 position;
+		//dist = Mathf.Clamp(dist - Input.GetAxis("Mouse ScrollWheel") * 5, distanceMin, distance);
 
 		Vector3 velocity = Vector3.zero;
-		Vector3 position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.transform.position;
-
+        if (collided == true) {
+            position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.transform.position-Vector3.Slerp((transform.position - target.transform.position), offset, 0.05f);
+        } else {
+		    position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.transform.position;
+        }
 		transform.position = position;
 		transform.rotation = rotation;
 				
@@ -101,5 +104,9 @@ public class FollowCam : MonoBehaviour {
     void OnTriggerExit(Collider coll) {//If you are no longer colliding with an object
         collided = false;
         Debug.Log("We outty");
+    }
+
+    private bool checkMPos() {
+        return true;
     }
 }
