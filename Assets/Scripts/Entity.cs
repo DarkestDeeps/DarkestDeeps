@@ -87,7 +87,13 @@ public class Entity : MonoBehaviour {
 
     public void orbitTarget(Transform target, float direction)
     {
-        anim.SetBool("Strafe", true);
+        if (direction != 0) { 
+            anim.SetBool("Strafing", true);
+        }
+        else
+        {
+           anim.SetBool("Strafing", false);
+        }
 
         transform.RotateAround(target.transform.position, Vector3.up, -20 * direction / 14);
     }
