@@ -14,17 +14,22 @@ public class FollowCam : MonoBehaviour {
     public float distanceMin = 0.5f;
 	private float x;
 	private float y;
+    private float xP;
+    private float yP;
 	private Vector3 offset;
 	private bool eyy;
     private float dist = 5.0f;
     private bool collided; //For detecting if there are collisions on the camera
 
 	void Start() {
-		offset = new Vector3(target.transform.position.x, target.transform.position.y-15, target.transform.position.z+10);
+		offset = new Vector3(target.transform.position.x, target.transform.position.y-15, target.transform.position.z+7);
         transform.LookAt(target.transform);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         eyy = true;
+
+        xP += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
+        yP -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
 	}
 
     void Update()
@@ -73,15 +78,18 @@ public class FollowCam : MonoBehaviour {
 		Quaternion rotation = Quaternion.Euler(y, x, 0);
 		Vector3 position;
 		//dist = Mathf.Clamp(dist - Input.GetAxis("Mouse ScrollWheel") * 5, distanceMin, distance);
-
-		Vector3 velocity = Vector3.zero;
-        if (collided == true) {
-            position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.transform.position-Vector3.Slerp((transform.position - target.transform.position), offset, 0.05f);
-        } else {
-		    position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.transform.position;
-        }
-		transform.position = position;
-		transform.rotation = rotation;
+        //if (checkMPos(x, y)) { 
+		    Vector3 velocity = Vector3.zero;
+           // if (collided == true) {
+             //   position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.transform.position-Vector3.Lerp((transform.position - target.transform.position), offset, 0.5f);
+            //} else {
+		        position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.transform.position;
+            //}
+		    transform.position = position;
+		    transform.rotation = rotation;
+            xP = x;
+            yP = y;
+        //}
 				
 	}
 
@@ -106,7 +114,11 @@ public class FollowCam : MonoBehaviour {
         Debug.Log("We outty");
     }
 
-    private bool checkMPos() {
-        return true;
+    private bool checkMPos(float x, float y) { //Checks to see if the mouse has been moved.
+        if (x == xP && y == yP) {
+            return false; //Returns false if the position has not changed (I.E. mouse has not been moved.
+        } else {
+            return true; //Returns true if the mouse has been moved.
+        }
     }
 }
