@@ -34,4 +34,4 @@ public class ConvButton : MonoBehaviour {
             Destroy(this);
         }
     }
-}
+} 
