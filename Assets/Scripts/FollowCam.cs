@@ -96,7 +96,7 @@ public class FollowCam : MonoBehaviour {
     void OnTriggerEnter(Collider coll) {//If You collide with an object
         if (coll.GetComponent<Collider>().gameObject.layer == LayerMask.NameToLayer("Default")) {
             collided = true;
-            Debug.Log("touchy touchy");
+            //Debug.Log("touchy touchy");
         }
         /*
          * 
@@ -111,7 +111,7 @@ public class FollowCam : MonoBehaviour {
 
     void OnTriggerExit(Collider coll) {//If you are no longer colliding with an object
         collided = false;
-        Debug.Log("We outty");
+        //Debug.Log("We outty");
     }
 
     private bool checkMPos(float x, float y) { //Checks to see if the mouse has been moved.
