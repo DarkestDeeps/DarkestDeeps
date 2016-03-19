@@ -1,23 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : Entity {
 
 	public GameObject playerObject;
-	Rigidbody rigid;
-    Animator anim;
     Player player;
 
-    public enum Personality { Defensive, Offensive };
-    public enum IntelligenceLevel { High, Moderate, Low };
+    //public enum Personality { Defensive, Offensive };
+    //public enum IntelligenceLevel { High, Moderate, Low };
 
-    public Personality enemyPersonality;
-    public IntelligenceLevel intelligence;
+    //public Personality enemyPersonality;
+    //public IntelligenceLevel intelligence;
 
     public float health;
-    public float attack;
+    public int agility;
 
-    public bool reactionChosen;
+    private float patience;
 
     private enum State
     {
@@ -25,13 +23,22 @@ public class Enemy : MonoBehaviour {
         STATE_IDLE,
         STATE_ATTACK
     }
+    public enum Action
+    {
+        STRAFE,
+        IDLE,
+        LIGHT_ATTACK,
+        STRONG_ATTACK,
+        BLOCK
+    }
 
-	// Use this for initialization
-	void Start () {
+    IntentInterpreter intentInterpreter;
 
+    // Use this for initialization
+    void Start () {
         player = playerObject.GetComponent<Player>();
-		rigid = gameObject.GetComponent<Rigidbody> ();
-        anim = gameObject.GetComponent<Animator>();
+        intentInterpreter = new IntentInterpreter(agility);
+        patience = 0;
 	}
 	
 	// Update is called once per frame
@@ -39,86 +46,76 @@ public class Enemy : MonoBehaviour {
 
         if (checkState() == State.STATE_CHASE)
         {
-            lookAtPlayer();
-            anim.SetBool("Chasing", true);
+            lookAtTarget(player.transform);
+            run(true, 1, Direction.Forward);
         }
         else if (checkState() == State.STATE_ATTACK)
         {
-            anim.SetBool("Chasing", false);
+            lookAtTarget(player.transform);
+            run(false, 1, Direction.Forward);
         }
         else
         {
-            anim.SetBool("Chasing", false);
+            run(false, 1, Direction.Forward);
         }
+
+        handlePlayerIntent(player.intentHandler.getIntent());
 	}
 
 	void OnTriggerEnter(Collider hitObject) {
 
 		if (hitObject.tag == "PlayerWeapon") {
             Weapon hitWeapon = hitObject.GetComponent<Weapon>();
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("React")) { 
-                 if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Defend")) {
-                    anim.SetTrigger("Hit");
-                    health = health - hitWeapon.getDamage();
-                    Debug.Log("Hit!");
-                    if (health <= 0)
-                    {
-                        anim.SetTrigger("Dead");
-                        Destroy(this);
-                    }
-                }
-                 else
-                 {
-                     health = health - (hitWeapon.getDamage() / 2);
-                     Debug.Log("Blocked!");
-                 }
-            }
+            takeDamage(hitWeapon.getDamage());
 		}
 	}
-
-    void attackTarget()
-    {
-        anim.SetTrigger("Attack");
-    }
 
     private State checkState() 
     {
         if ((transform.position - playerObject.transform.position).sqrMagnitude < 50) {
-            if ((transform.position - playerObject.transform.position).sqrMagnitude < 1.5f) {
+            if ((transform.position - playerObject.transform.position).sqrMagnitude < 5f) {
+                anim.SetBool("AttackState", true);
                 return State.STATE_ATTACK;
             }
+            anim.SetBool("AttackState", true);
             return State.STATE_CHASE;
         }
         else
         {
+            anim.SetBool("AttackState", false);
             return State.STATE_IDLE;
         }
     }
 
-    private void lookAtPlayer()
+    public void handlePlayerIntent(IntentHandler.Intent intent)
     {
-        transform.LookAt(new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z));
+
+        Action action = intentInterpreter.InterpretIntent(patience, intent);
+
+        if (action == Action.LIGHT_ATTACK)
+        {
+            lightAttack();
+            ResetPatience();
+        }
+        else if (action == Action.BLOCK)
+        {
+            defend(true);
+        }
+        else if (intent == IntentHandler.Intent.INTENT_STRAFE)
+        {
+            strafe(player.transform, player.h);
+        }
     }
 
-    public static float calcAttack(int smrt, int hp, float rage)
+    public void StepPatience()
     {
-        float intent = (smrt / (20 / hp) + (rage * 5));
-        return intent;
-    }  
+        if (patience < 100) {
+            patience = patience + 0.5f * Time.deltaTime;
+        }
+    }
 
-    public void receiveIntent(Player.Intent intent)
+    public void ResetPatience()
     {
-        if (intent == Player.Intent.INTENT_ATTACK_LIGHT)
-        {
-            anim.SetInteger("Reaction", 2);
-        }
-        if (intent == Player.Intent.INTENT_CHARGE)
-        {
-            anim.SetInteger("Reaction", 2);
-        }
-        if (intent == Player.Intent.INTENT_IDLE)
-        {
-            anim.SetInteger("Reaction", 4);
-        }
+        patience = 0;
     }
 }

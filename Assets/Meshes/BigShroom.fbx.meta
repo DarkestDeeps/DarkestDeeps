@@ -8,11 +8,15 @@ ModelImporter:
     100000: Big_Shroom
     100002: //RootNode
     100004: Lamp
+    100006: Lamp.001
     400000: Big_Shroom
     400002: //RootNode
     400004: Lamp
+    400006: Lamp.001
     2300000: Big_Shroom
+    2300002: //RootNode
     3300000: Big_Shroom
+    3300002: //RootNode
     4300000: Big_Shroom
   materials:
     importMaterials: 1

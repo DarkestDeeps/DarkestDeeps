@@ -20,9 +20,14 @@ public class EnemyTargeting : MonoBehaviour {
 		}
 	}
 
-	public GameObject getTargetEnemy() {
+	public GameObject getTargetEnemyObject() {
 		return enemyList[0];
 	}
+
+    public Enemy getTargetEnemy()
+    {
+        return enemyList[0].GetComponent<Enemy>();
+    }
 
 	public Vector3 getEnemyPosition() {
         return getTargetEnemy().transform.position;
@@ -31,10 +36,4 @@ public class EnemyTargeting : MonoBehaviour {
 	public int getEnemyCount() {
 		return enemyList.Count;
 	}
-
-    public void broadcastIntent(Player.Intent intent)
-    {
-        Enemy enemy = getTargetEnemy().GetComponent<Enemy>();
-        enemy.receiveIntent(intent);
-    }
 }

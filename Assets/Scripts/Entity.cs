@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
-using System;
+using UnityEngine;
 
 public class Entity : MonoBehaviour {
 
@@ -9,9 +9,13 @@ public class Entity : MonoBehaviour {
     public float acceleration;
     public float deceleration;
 
+    public float healthPoints;
+
     public Animator anim;
 
     private float distance;
+
+    public Weapon weapon;
 
     public enum Direction
     {
@@ -22,17 +26,20 @@ public class Entity : MonoBehaviour {
         None
     };
 
+    public enum attackType
+    {
+        Strong,
+        Light
+    };
+
     public void run(bool run, float mod, Direction dir)
     {
-        Debug.Log(mod);
-
         if (run)
         {
 
             if (dir == Direction.Forward)
             {
                 anim.SetBool("RunForward", true);
-                Debug.Log("ayyy");
 
                 if (speed < (maxSpeed / mod))
                 {
@@ -74,18 +81,16 @@ public class Entity : MonoBehaviour {
             {
                 speed = speed - deceleration * Time.deltaTime;
                 transform.position += transform.forward * speed * Time.deltaTime;
-                Debug.Log("Above" + speed);
             }
             else if (speed < -0.5)
             {
                 speed = speed + deceleration * Time.deltaTime;
                 transform.position += transform.forward * speed * Time.deltaTime;
-                Debug.Log("Below" + speed);
             }
         }
     }
 
-    public void orbitTarget(Transform target, float direction)
+    public void strafe(Transform target, float direction)
     {
         if (direction != 0) { 
             anim.SetBool("Strafing", true);
@@ -95,6 +100,77 @@ public class Entity : MonoBehaviour {
            anim.SetBool("Strafing", false);
         }
 
-        transform.RotateAround(target.transform.position, Vector3.up, -20 * direction / 14);
+        transform.RotateAround(target.transform.position, Vector3.up, -20 * direction / 7);
+    }
+
+    public IEnumerator dash(Transform target, float dashSpeed)
+    {
+
+        while (true) { 
+
+            float step = dashSpeed * Time.deltaTime;
+
+            if ((transform.position - target.transform.position).sqrMagnitude > 4)
+            {
+                anim.SetBool("Dashing", true);
+                transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+                yield return null;
+            }
+            else
+            {
+                anim.SetTrigger("StrongAttack");
+                anim.SetBool("Dashing", false);
+                yield break;
+            }
+        }
+    }
+
+    public void lookAtTarget(Transform target)
+    {
+        Vector3 targetPostition = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
+        transform.LookAt(targetPostition);
+    }
+
+    public void lightAttack()
+    {
+        anim.SetInteger("AttackChoice", UnityEngine.Random.Range(0, 2));
+        anim.SetTrigger("LightAttack");
+    }
+
+    public void strongAttack()
+    {
+        anim.SetTrigger("StrongAttack");
+    }
+
+    public void defend(bool def)
+    {
+        anim.SetBool("Defending", def);
+    }
+
+    public void takeDamage(float damage)
+    {
+        healthPoints = healthPoints - damage;
+
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("React")) {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Defend")) {
+                healthPoints = healthPoints - damage;
+                anim.SetTrigger("Hit");
+            }
+            else
+            {
+                healthPoints = healthPoints - (damage / 2);
+            }
+        }
+
+        if (healthPoints <= 0)
+        {
+            anim.SetTrigger("Death");
+            Destroy(this);
+        }
+    }
+
+    public void toggleWeaponCollider(int tog)
+    {
+        weapon.toggleCollider(tog);
     }
 }
