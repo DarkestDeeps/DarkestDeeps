@@ -118,7 +118,6 @@ public class Entity : MonoBehaviour {
             }
             else
             {
-                Debug.Log("Spin");
                 anim.SetTrigger("StrongAttack");
                 anim.SetBool("Dashing", false);
                 yield break;

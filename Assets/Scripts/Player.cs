@@ -29,9 +29,6 @@ public class Player : Entity {
 	
 	void Update() {
 
-        Debug.Log("Current: " + currentState);
-        Debug.Log("Potential: " + potentialState);
-
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
