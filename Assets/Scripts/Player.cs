@@ -14,17 +14,8 @@ public class Player : Entity {
     public float v;
 
 	public enum State {Passive, Attacking};
-    public enum Intent { 
-        INTENT_ATTACK_LIGHT = 0, 
-        INTENT_CHARGE = 1, 
-        INTENT_BLOCK =2, 
-        INTENT_STRAFE = 3, 
-        INTENT_IDLE = 4
-    };
 
 	public State currentState;
-
-    private Intent playerIntent;
 
 	void Start() {
 		mainCam = Camera.main;
@@ -38,16 +29,18 @@ public class Player : Entity {
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
-		if (currentState == State.Passive) {
+        if ((Input.GetMouseButton(1)) && (targetTracker.getEnemyCount() != 0))
+        {
+            setCurrentState(State.Attacking);
+        }
+        else {
+            setCurrentState(State.Passive);
+        }
+
+        if (currentState == State.Passive) {
 			passiveStateBehaviour ();
 		} else {
 			attackStateBehaviour();
-		}
-
-		if ((Input.GetMouseButton(1)) && (targetTracker.getEnemyCount() != 0)) {
-			setCurrentState(State.Attacking);
-		} else {
-            setCurrentState(State.Passive);
 		}
 	}
 

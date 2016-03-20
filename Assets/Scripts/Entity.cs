@@ -173,4 +173,11 @@ public class Entity : MonoBehaviour {
     {
         weapon.toggleCollider(tog);
     }
+
+    public void resetAnimator()
+    {
+        anim.SetBool("Strafing", false);
+        anim.SetBool("RunBackwards", false);
+        anim.SetBool("RunForward", false);
+    }
 }

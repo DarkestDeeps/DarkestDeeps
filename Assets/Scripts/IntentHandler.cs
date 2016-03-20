@@ -20,31 +20,33 @@ public class IntentHandler {
     public void checkIntent(Animator anim) //Checks the animation currently playing for the player and then assigns a reaction based off of it.
     {
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Slash") || anim.GetCurrentAnimatorStateInfo(0).IsName("Offhand Slash")) //If the player is doing X then Respond X
+        AnimatorStateInfo currentAnim = anim.GetCurrentAnimatorStateInfo(0);
+
+        if (currentAnim.IsName("Slash") || currentAnim.IsName("Offhand Slash")) //If the player is doing X then Respond X
         {
             setIntent(Intent.INTENT_ATTACK_LIGHT);
         }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Strafe"))
+        else if (currentAnim.IsName("Strafe"))
         {
             setIntent(Intent.INTENT_STRAFE);
         }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dash"))
+        else if (currentAnim.IsName("Dash"))
         {
             setIntent(Intent.INTENT_CHARGE);
         }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Spin_Atack"))
+        else if (currentAnim.IsName("Spin_Atack"))
         {
             setIntent(Intent.INTENT_ATTACK_STRONG);
         }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack_Idle"))
+        else if (currentAnim.IsName("Attack_Idle"))
         {
             setIntent(Intent.INTENT_IDLE);
         }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("RunForward"))
+        else if (currentAnim.IsName("RunForward"))
         {
             setIntent(Intent.INTENT_APPROACH);
         }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Run Back"))
+        else if (currentAnim.IsName("Run Back"))
         {
             setIntent(Intent.INTENT_RETREAT);
         }
