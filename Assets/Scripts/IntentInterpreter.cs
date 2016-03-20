@@ -23,7 +23,6 @@ public class IntentInterpreter : MonoBehaviour {
                     return Enemy.Action.LIGHT_ATTACK;
                 }
             case IntentHandler.Intent.INTENT_ATTACK_LIGHT:
-                Debug.Log(agility);
                 if (Random.Range(1,10) >= agility) //If greater than agility, block
                 {
                     Debug.Log("He Blocky");
@@ -31,7 +30,6 @@ public class IntentInterpreter : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("EYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
                     return Enemy.Action.STRAFE; //PLEASE HIT ME
                 }
         }

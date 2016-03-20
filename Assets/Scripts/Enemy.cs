@@ -43,7 +43,6 @@ public class Enemy : Entity {
 	
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log("Patience: " + patience);
         if (checkState() == State.STATE_CHASE)
         {
             lookAtTarget(player.transform);
@@ -92,17 +91,17 @@ public class Enemy : Entity {
 
         Action action = intentInterpreter.InterpretIntent(patience, intent);
 
-        if (action == Action.LIGHT_ATTACK) { //If the AI decides to do a light attack
+        if (action == Action.LIGHT_ATTACK) { //If the AI decides to do a light attack, reset the patience because it attacked.
             lightAttack(); //Do a light attack
             ResetPatience(); //Reset patience to 0
             defend(false); //Stop the AI from defending
         }
-        else if (action == Action.BLOCK) {
+        else if (action == Action.BLOCK) { //Blocks the attack. True for blocking, false to stop.
             defend(true);
             strafe(player.transform, 0);
-        } else if (action == Action.STRAFE) {
+        } else if (action == Action.STRAFE) { //Is a placeholder for dodge. 1 or -1 to decide direction, 0 to not strafe. (Fix that soon? (TM))
             strafe(player.transform, 1);
-        } else if (action == Action.IDLE) {
+        } else if (action == Action.IDLE) { //Sets to Idle & disables all other movement
             Debug.Log("Disabled");
             strafe(player.transform, 0);
             defend(false);
