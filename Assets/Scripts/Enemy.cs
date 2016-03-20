@@ -39,6 +39,7 @@ public class Enemy : Entity {
         player = playerObject.GetComponent<Player>();
         intentInterpreter = new IntentInterpreter(agility);
         patience = 0;
+        health = 10000000.0f; //PLEASE REMOVE THIS LATER
 	}
 	
 	// Update is called once per frame
@@ -100,10 +101,6 @@ public class Enemy : Entity {
         else if (action == Action.BLOCK)
         {
             defend(true);
-        }
-        else if (intent == IntentHandler.Intent.INTENT_STRAFE)
-        {
-            strafe(player.transform, player.h);
         }
     }
 
