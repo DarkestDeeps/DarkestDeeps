@@ -39,12 +39,11 @@ public class Enemy : Entity {
         player = playerObject.GetComponent<Player>();
         intentInterpreter = new IntentInterpreter(agility);
         patience = 0;
-        health = 10000000.0f; //PLEASE REMOVE THIS LATER
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+        //Debug.Log("Patience: " + patience);
         if (checkState() == State.STATE_CHASE)
         {
             lookAtTarget(player.transform);
@@ -54,13 +53,13 @@ public class Enemy : Entity {
         {
             lookAtTarget(player.transform);
             run(false, 1, Direction.Forward);
+            handlePlayerIntent(player.intentHandler.getIntent());
+            StepPatience();
         }
         else
         {
             run(false, 1, Direction.Forward);
         }
-
-        handlePlayerIntent(player.intentHandler.getIntent());
 	}
 
 	void OnTriggerEnter(Collider hitObject) {
@@ -79,12 +78,12 @@ public class Enemy : Entity {
                 return State.STATE_ATTACK;
             }
             anim.SetBool("AttackState", true);
-            return State.STATE_CHASE;
+            return State.STATE_CHASE; //Sets it to follow the player
         }
         else
         {
             anim.SetBool("AttackState", false);
-            return State.STATE_IDLE;
+            return State.STATE_IDLE; //If the player is out of the range of the Enemy it idles
         }
     }
 
@@ -93,22 +92,27 @@ public class Enemy : Entity {
 
         Action action = intentInterpreter.InterpretIntent(patience, intent);
 
-        if (action == Action.LIGHT_ATTACK)
-        {
-            lightAttack();
-            ResetPatience();
-            defend(false);
+        if (action == Action.LIGHT_ATTACK) { //If the AI decides to do a light attack
+            lightAttack(); //Do a light attack
+            ResetPatience(); //Reset patience to 0
+            defend(false); //Stop the AI from defending
         }
-        else if (action == Action.BLOCK)
-        {
+        else if (action == Action.BLOCK) {
             defend(true);
+            strafe(player.transform, 0);
+        } else if (action == Action.STRAFE) {
+            strafe(player.transform, 1);
+        } else if (action == Action.IDLE) {
+            Debug.Log("Disabled");
+            strafe(player.transform, 0);
+            defend(false);
         }
     }
 
-    public void StepPatience()
+    public void StepPatience() //Increases patience by an arbitrary amount (up to 100) based on Time between frames
     {
         if (patience < 100) {
-            patience = patience + 0.000000005f * Time.deltaTime;
+            patience = patience + 25f * Time.deltaTime;
         }
     }
 
