@@ -16,35 +16,52 @@ public class Player : Entity {
 	public enum State {Passive, Attacking};
 
 	public State currentState;
+    public State potentialState;
 
 	void Start() {
 		mainCam = Camera.main;
 		targetTracker = gameObject.GetComponentInChildren<EnemyTargeting> ();
         weapon = gameObject.GetComponentInChildren<Weapon>();
         intentHandler = new IntentHandler();
+        currentState = State.Passive;
+        potentialState = State.Passive;
 	}
 	
 	void Update() {
+
+        Debug.Log("Current: " + currentState);
+        Debug.Log("Potential: " + potentialState);
 
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
         if ((Input.GetMouseButton(1)) && (targetTracker.getEnemyCount() != 0))
         {
-            setCurrentState(State.Attacking);
+            potentialState = State.Attacking;
         }
         else {
-            setCurrentState(State.Passive);
+            potentialState = State.Passive;
         }
 
-        if (currentState == State.Passive) {
-			passiveStateBehaviour ();
-		} else {
-			attackStateBehaviour();
-		}
+        if (currentState != potentialState)
+        {
+            switchStates(potentialState);
+        }
+
+        if (currentState == State.Passive)
+        {
+            passiveStateBehaviour();
+        }
+        else
+        {
+            attackStateBehaviour();
+        }
 	}
 
 	private void attackStateBehaviour() {
+
+
+        anim.SetBool("AttackState", true);
 
 		GameObject enemy = targetTracker.getTargetEnemyObject();
 
@@ -80,8 +97,10 @@ public class Player : Entity {
 	}
 
 	private void passiveStateBehaviour() {
-		
-		Vector3 cameraForward = mainCam.transform.TransformDirection(Vector3.forward);
+
+        anim.SetBool("AttackState", false);
+
+        Vector3 cameraForward = mainCam.transform.TransformDirection(Vector3.forward);
 		cameraForward.y = 0;    
 	
 		Vector3 cameraRight = mainCam.transform.TransformDirection(Vector3.right);
@@ -124,5 +143,12 @@ public class Player : Entity {
             Weapon hitWeapon = hitObject.GetComponent<Weapon>();
             takeDamage(hitWeapon.getDamage());
         }
+    }
+
+    void switchStates(State newState)
+    {
+        Debug.Log("Switching!");
+        resetAnimator();
+        currentState = newState;
     }
 }
