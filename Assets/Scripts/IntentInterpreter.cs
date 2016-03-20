@@ -5,10 +5,6 @@ public class IntentInterpreter : MonoBehaviour {
 
     int agility;
 
-    void Start() {
-        agility = 0;
-    }
-
     public IntentInterpreter(int agility) //Supposed to be agility, but alex goofed
     {
         agility = this.agility;
@@ -19,7 +15,7 @@ public class IntentInterpreter : MonoBehaviour {
         switch (intent)
         {
             case IntentHandler.Intent.INTENT_IDLE:
-                if (patience <= 50)
+                if (patience >= 50)
                 {
                     return Enemy.Action.STRAFE;
                 }

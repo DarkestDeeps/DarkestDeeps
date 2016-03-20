@@ -22,7 +22,7 @@ public class IntentHandler {
 
         AnimatorStateInfo currentAnim = anim.GetCurrentAnimatorStateInfo(0);
 
-        if (currentAnim.IsName("Slash") || currentAnim.IsName("Offhand Slash")) //If the player is doing X then Respond X
+        if (currentAnim.IsName("Slash") || currentAnim.IsName("Offhand Slash")) //If the player is doing X then go to IntentInterpreter and get Response X
         {
             setIntent(Intent.INTENT_ATTACK_LIGHT);
         }

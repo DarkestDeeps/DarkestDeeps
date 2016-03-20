@@ -97,6 +97,7 @@ public class Enemy : Entity {
         {
             lightAttack();
             ResetPatience();
+            defend(false);
         }
         else if (action == Action.BLOCK)
         {
@@ -107,7 +108,7 @@ public class Enemy : Entity {
     public void StepPatience()
     {
         if (patience < 100) {
-            patience = patience + 0.5f * Time.deltaTime;
+            patience = patience + 0.000000005f * Time.deltaTime;
         }
     }
 
