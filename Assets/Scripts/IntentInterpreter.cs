@@ -5,6 +5,9 @@ public class IntentInterpreter : MonoBehaviour {
 
     int agility;
 
+    IntentHandler.Intent currentIntent;
+    IntentHandler.Intent potentialIntent;
+
     public IntentInterpreter(int agility) //Supposed to be agility, but alex goofed
     {
         this.agility = agility;
