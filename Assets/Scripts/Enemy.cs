@@ -17,6 +17,9 @@ public class Enemy : Entity {
 
     private float patience;
 
+    private IntentHandler.Intent currentIntent;
+    private IntentHandler.Intent potentialIntent;
+
     private enum State
     {
         STATE_CHASE,
@@ -102,11 +105,12 @@ public class Enemy : Entity {
         } else if (action == Action.STRAFE) { //Is a placeholder for dodge. 1 or -1 to decide direction, 0 to not strafe. (Fix that soon? (TM))
             strafe(player.transform, 1);
         } else if (action == Action.IDLE) { //Sets to Idle & disables all other movement
-            Debug.Log("Disabled");
             strafe(player.transform, 0);
             defend(false);
         }
     }
+
+
 
     public void StepPatience() //Increases patience by an arbitrary amount (up to 100) based on Time between frames
     {

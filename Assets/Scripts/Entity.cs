@@ -109,8 +109,8 @@ public class Entity : MonoBehaviour {
         while (true) { 
 
             float step = dashSpeed * Time.deltaTime;
-
-            if ((transform.position - target.transform.position).sqrMagnitude > 4)
+            
+            if ((transform.position - target.transform.position).sqrMagnitude > 2)
             {
                 anim.SetBool("Dashing", true);
                 transform.position = Vector3.MoveTowards(transform.position, target.position, step);
@@ -124,7 +124,7 @@ public class Entity : MonoBehaviour {
             }
         }
     }
-
+    
     public void lookAtTarget(Transform target)
     {
         if (!stopLook()) { 

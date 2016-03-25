@@ -80,9 +80,10 @@ public class Player : Entity {
 
         if (Input.GetMouseButtonDown(0))
         {
-                if (v > 0)
-                {
-                    StartCoroutine(dash(enemy.transform, maxSpeed));
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                    Debug.Log("AHHHHHHHHH");
+                    StartCoroutine(dash(enemy.transform, maxSpeed * 2));
                 }
                 else
                 {
