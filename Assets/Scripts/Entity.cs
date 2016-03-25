@@ -127,8 +127,10 @@ public class Entity : MonoBehaviour {
 
     public void lookAtTarget(Transform target)
     {
-        Vector3 targetPostition = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
-        transform.LookAt(targetPostition);
+        if (!stopLook()) { 
+            Vector3 targetPostition = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
+            transform.LookAt(targetPostition);
+        }
     }
 
     public void lightAttack()
@@ -179,5 +181,14 @@ public class Entity : MonoBehaviour {
         anim.SetBool("Strafing", false);
         anim.SetBool("RunBackwards", false);
         anim.SetBool("RunForward", false);
+    }
+
+    private bool stopLook() { //Checks to see if the player/enemy is not attacking
+        AnimatorStateInfo currentAnim = anim.GetCurrentAnimatorStateInfo(0);
+        if (currentAnim.IsName("Attack_Idle")) { //
+            return false;
+        } else {
+            return true;
+        }
     }
 }
