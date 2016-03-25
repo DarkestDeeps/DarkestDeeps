@@ -101,11 +101,9 @@ public class Enemy : Entity {
         }
         else if (action == Action.BLOCK) { //Blocks the attack. True for blocking, false to stop.
             defend(true);
-            strafe(player.transform, 0);
         } else if (action == Action.STRAFE) { //Is a placeholder for dodge. 1 or -1 to decide direction, 0 to not strafe. (Fix that soon? (TM))
             strafe(player.transform, 1);
         } else if (action == Action.IDLE) { //Sets to Idle & disables all other movement
-            strafe(player.transform, 0);
             defend(false);
         }
     }
