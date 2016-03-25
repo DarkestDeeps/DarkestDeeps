@@ -135,8 +135,10 @@ public class Player : Entity {
         return currentState;
     }
 
-    void OnTriggerEnter(Collider hitObject) {
-        if (hitObject.tag == "EnemyWeapon") {
+    void OnTriggerEnter(Collider hitObject)
+    {
+        if (hitObject.tag == "EnemyWeapon")
+        {
             Weapon hitWeapon = hitObject.GetComponent<Weapon>();
             takeDamage(hitWeapon.getDamage());
         }
