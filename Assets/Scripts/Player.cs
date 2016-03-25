@@ -68,13 +68,13 @@ public class Player : Entity {
 
         switch ((int)v) {
             case 1:
-                run(true, 2, Entity.Direction.Forward);
+                run(true, 3, Entity.Direction.Forward);
                 break;
             case 0:
-                run(false, 2, Entity.Direction.None);
+                run(false, 3, Entity.Direction.None);
                 break;
             case -1:
-                run(true, 2, Entity.Direction.Backward);
+                run(true, 3, Entity.Direction.Backward);
                 break;
         }
 

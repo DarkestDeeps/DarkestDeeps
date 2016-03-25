@@ -45,6 +45,24 @@ public class IntentInterpreter : MonoBehaviour {
                 }
             case IntentHandler.Intent.INTENT_RETREAT:
                 return Enemy.Action.CHARGE;
+            case IntentHandler.Intent.INTENT_APPROACH:
+                if (patience < 60)
+                {
+                    return Enemy.Action.BLOCK;
+                }
+                else
+                {
+                    return Enemy.Action.CHARGE;
+                }
+            case IntentHandler.Intent.INTENT_ATTACK_STRONG:
+                if (Random.Range(1, 10) >= agility) //If greater than agility, block
+                {
+                    return Enemy.Action.BLOCK;
+                }
+                else
+                {
+                    break;
+                }
         }
         return Enemy.Action.IDLE;
     }

@@ -108,7 +108,11 @@ public class Enemy : Entity {
         }
         if (action == Action.STRAFE)
         { //Is a placeholder for dodge. 1 or -1 to decide direction, 0 to not strafe. (Fix that soon? (TM))
-            strafe(player.transform, 1);
+            strafe(player.transform, player.h);
+        }
+        else
+        {
+            strafe(player.transform, 0);
         }
         if (action == Action.IDLE)
         { //Sets to Idle & disables all other movement
