@@ -64,11 +64,13 @@ public class Enemy : Entity {
         }
 	}
 
+    //Detects if the player sword passes through enemy collider
 	void OnTriggerEnter(Collider hitObject) {
 
 		if (hitObject.tag == "PlayerWeapon") {
             Weapon hitWeapon = hitObject.GetComponent<Weapon>();
             takeDamage(hitWeapon.getDamage());
+            Debug.Log(healthPoints);
 		}
 	}
 
@@ -99,11 +101,16 @@ public class Enemy : Entity {
             ResetPatience(); //Reset patience to 0
             defend(false); //Stop the AI from defending
         }
-        else if (action == Action.BLOCK) { //Blocks the attack. True for blocking, false to stop.
+        if (action == Action.BLOCK)
+        { //Blocks the attack. True for blocking, false to stop.
             defend(true);
-        } else if (action == Action.STRAFE) { //Is a placeholder for dodge. 1 or -1 to decide direction, 0 to not strafe. (Fix that soon? (TM))
+        }
+        if (action == Action.STRAFE)
+        { //Is a placeholder for dodge. 1 or -1 to decide direction, 0 to not strafe. (Fix that soon? (TM))
             strafe(player.transform, 1);
-        } else if (action == Action.IDLE) { //Sets to Idle & disables all other movement
+        }
+        if (action == Action.IDLE)
+        { //Sets to Idle & disables all other movement
             defend(false);
         }
     }

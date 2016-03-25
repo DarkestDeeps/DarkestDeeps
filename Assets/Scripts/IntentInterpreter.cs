@@ -32,7 +32,7 @@ public class IntentInterpreter : MonoBehaviour {
                 }
                 else
                 {
-                    return Enemy.Action.STRAFE; //PLEASE HIT ME
+                    break;
                 }
         }
         return Enemy.Action.IDLE;
