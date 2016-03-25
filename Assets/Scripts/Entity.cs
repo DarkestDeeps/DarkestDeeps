@@ -127,7 +127,7 @@ public class Entity : MonoBehaviour {
     
     public void lookAtTarget(Transform target)
     {
-        if (!stopLook()) { 
+        if (stopLook()) { 
             Vector3 targetPostition = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
             transform.LookAt(targetPostition);
         }
@@ -185,9 +185,9 @@ public class Entity : MonoBehaviour {
 
     private bool stopLook() { //Checks to see if the player/enemy is not attacking
         AnimatorStateInfo currentAnim = anim.GetCurrentAnimatorStateInfo(0);
-        if (currentAnim.IsName("Attack_Idle")) { //
+        if (currentAnim.IsName("Attack_Idle")) { //If the attack_idle animation is currently playing, return false, signifying that the player/enemy is not attacking
             return false;
-        } else {
+        } else { //Else, return false
             return true;
         }
     }
