@@ -32,7 +32,8 @@ public class Enemy : Entity {
         IDLE,
         LIGHT_ATTACK,
         STRONG_ATTACK,
-        BLOCK
+        BLOCK,
+        CHARGE
     }
 
     IntentInterpreter intentInterpreter;
@@ -112,6 +113,10 @@ public class Enemy : Entity {
         if (action == Action.IDLE)
         { //Sets to Idle & disables all other movement
             defend(false);
+        }
+        if (action == Action.CHARGE)
+        {
+            StartCoroutine(dash(player.transform, maxSpeed * 2));
         }
     }
 

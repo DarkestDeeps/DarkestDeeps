@@ -34,6 +34,17 @@ public class IntentInterpreter : MonoBehaviour {
                 {
                     break;
                 }
+            case IntentHandler.Intent.INTENT_STRAFE:
+                if (patience > 50)
+                {
+                    return Enemy.Action.STRAFE;
+                }
+                else
+                {
+                    break;
+                }
+            case IntentHandler.Intent.INTENT_RETREAT:
+                return Enemy.Action.CHARGE;
         }
         return Enemy.Action.IDLE;
     }
