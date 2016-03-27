@@ -1,27 +1,82 @@
 fileFormatVersion: 2
-guid: 120c33ed375ad5f4cae740c8ee483343
-timeCreated: 1458873400
+guid: e86afc86bf3a5ee47957f239732dc3df
+timeCreated: 1459010785
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: cube
     100002: cube1
-    100004: polymsh_extracted15
-    100006: //RootNode
+    100004: cube10
+    100006: cube2
+    100008: cube3
+    100010: cube5
+    100012: cube6
+    100014: cube9
+    100016: cylinder
+    100018: cylinder1
+    100020: cylinder2
+    100022: cylinder3
+    100024: cylinder4
+    100026: polymsh
+    100028: //RootNode
     400000: cube
     400002: cube1
-    400004: polymsh_extracted15
-    400006: //RootNode
+    400004: cube10
+    400006: cube2
+    400008: cube3
+    400010: cube5
+    400012: cube6
+    400014: cube9
+    400016: cylinder
+    400018: cylinder1
+    400020: cylinder2
+    400022: cylinder3
+    400024: cylinder4
+    400026: polymsh
+    400028: //RootNode
     2300000: cube
     2300002: cube1
-    2300004: polymsh_extracted15
+    2300004: cube10
+    2300006: cube2
+    2300008: cube3
+    2300010: cube5
+    2300012: cube6
+    2300014: cube9
+    2300016: cylinder
+    2300018: cylinder1
+    2300020: cylinder2
+    2300022: cylinder3
+    2300024: cylinder4
+    2300026: polymsh
     3300000: cube
     3300002: cube1
-    3300004: polymsh_extracted15
+    3300004: cube10
+    3300006: cube2
+    3300008: cube3
+    3300010: cube5
+    3300012: cube6
+    3300014: cube9
+    3300016: cylinder
+    3300018: cylinder1
+    3300020: cylinder2
+    3300022: cylinder3
+    3300024: cylinder4
+    3300026: polymsh
     4300000: cube
     4300002: cube1
-    4300004: polymsh_extracted15
+    4300004: cube2
+    4300006: cube3
+    4300008: cube5
+    4300010: cube6
+    4300012: cylinder
+    4300014: cube9
+    4300016: cylinder1
+    4300018: cylinder2
+    4300020: cylinder3
+    4300022: cylinder4
+    4300024: polymsh
+    4300026: cube10
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -54,7 +109,7 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 0
+    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
