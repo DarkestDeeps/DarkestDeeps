@@ -183,7 +183,7 @@ public class Entity : MonoBehaviour {
         anim.SetBool("RunForward", false);
     }
 
-    private bool stopLook() { //Checks to see if the player/enemy is not attacking
+    public bool stopLook() { //Checks to see if the player/enemy is not attacking
         AnimatorStateInfo currentAnim = anim.GetCurrentAnimatorStateInfo(0);
         if (currentAnim.IsName("Attack_Idle")) { //If the attack_idle animation is currently playing, return false, signifying that the player/enemy is not attacking
             return false;
