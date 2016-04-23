@@ -13,7 +13,7 @@ public class Player : Entity {
     public float h;
     public float v;
 
-	public enum State {Passive, Attacking};
+	public enum State {Passive, Attacking, GrabbingLedge};
 
 	public State currentState;
     public State potentialState;
@@ -27,12 +27,18 @@ public class Player : Entity {
         potentialState = State.Passive;
 	}
 	
-	void Update() {
+	protected override void Update() {
+
+        anim.SetBool("Grounded", groundDetector.isGrounded());
 
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
-        if ((Input.GetMouseButton(1)) && (targetTracker.getEnemyCount() != 0))
+        if (grabbingLedge)
+        {
+            potentialState = State.GrabbingLedge;
+        }
+        else if ((Input.GetKey(KeyCode.LeftShift)) && (targetTracker.getEnemyCount() != 0))
         {
             potentialState = State.Attacking;
         }
@@ -45,17 +51,22 @@ public class Player : Entity {
             switchStates(potentialState);
         }
 
-        if (currentState == State.Passive)
+        if (currentState == State.Attacking)
         {
-            passiveStateBehaviour();
+            attackStateBehaviour();
+        }
+        else if (currentState == State.GrabbingLedge)
+        {
+            grabbingLedgeBehaviour();
         }
         else
         {
-            attackStateBehaviour();
+            passiveStateBehaviour();
         }
 	}
 
 	private void attackStateBehaviour() {
+
 
 
         anim.SetBool("AttackState", true);
@@ -78,23 +89,36 @@ public class Player : Entity {
                 break;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(1))
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            defend(true);
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                    Debug.Log("AHHHHHHHHH");
-                    StartCoroutine(dash(enemy.transform, maxSpeed * 2));
-                }
-                else
-                {
-                    lightAttack();
-                }
+                defend(false);
+                dodge(Direction.Left);
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                defend(false);
+                dodge(Direction.Right);
+            }
         }
+        else if (Input.GetMouseButton(0))
+        {
+            lightAttack(enemy.transform);
+        }
+        else
+        {
+            defend(false);
+        }
+
+
 
         intentHandler.checkIntent(anim);
 	}
 
-	private void passiveStateBehaviour() {
+	private void passiveStateBehaviour()
+    {
 
         anim.SetBool("AttackState", false);
 
@@ -108,14 +132,52 @@ public class Player : Entity {
 		if (lookDirection != Vector3.zero) {
 			transform.rotation = Quaternion.LookRotation (lookDirection);
 		}
-		
+
 		if (h != 0 || v != 0) {
-            run(true, 1, Entity.Direction.Forward);
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                if (speed > 0)
+                {
+                    slide(true);
+                }
+                else
+                {
+                    slide(false);
+                }
+            }
+            else
+            {
+                run(true, 1, Direction.Forward);
+            }
 		} else {
-            run(false, 1, Entity.Direction.Forward);
+            run(false, 1, Direction.Forward);
 		}
 
-	}
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            slide(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            jump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            vault();
+            grabLedge();
+        }
+
+    }
+
+    public void grabbingLedgeBehaviour()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            StartCoroutine(MountLedge());
+        }
+    }
 
     public void setCurrentState(State state)
     {
@@ -123,6 +185,10 @@ public class Player : Entity {
         {
             currentState = State.Passive;
             anim.SetBool("AttackState", false);
+        }
+        else if (state == State.GrabbingLedge)
+        {
+            currentState = State.GrabbingLedge;
         }
         else
         {
@@ -151,4 +217,5 @@ public class Player : Entity {
         resetAnimator();
         currentState = newState;
     }
+
 }

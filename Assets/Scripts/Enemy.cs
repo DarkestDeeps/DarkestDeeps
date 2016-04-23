@@ -41,7 +41,7 @@ public class Enemy : Entity {
     // Use this for initialization
     void Start () {
         player = playerObject.GetComponent<Player>();
-        intentInterpreter = new IntentInterpreter(agility);
+        intentInterpreter = new IntentInterpreter(agility, this);
         patience = 0;
 	}
 	
@@ -98,7 +98,7 @@ public class Enemy : Entity {
         Action action = intentInterpreter.InterpretIntent(patience, intent);
 
         if (action == Action.LIGHT_ATTACK) { //If the AI decides to do a light attack, reset the patience because it attacked.
-            lightAttack(); //Do a light attack
+            lightAttack(player.transform); //Do a light attack
             ResetPatience(); //Reset patience to 0
             defend(false); //Stop the AI from defending
         }
@@ -120,7 +120,7 @@ public class Enemy : Entity {
         }
         if (action == Action.CHARGE)
         {
-            StartCoroutine(dash(player.transform, maxSpeed * 2));
+            dash(player.transform);
         }
     }
 
