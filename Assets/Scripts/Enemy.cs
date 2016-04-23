@@ -71,7 +71,6 @@ public class Enemy : Entity {
 		if (hitObject.tag == "PlayerWeapon") {
             Weapon hitWeapon = hitObject.GetComponent<Weapon>();
             takeDamage(hitWeapon.getDamage());
-            Debug.Log(healthPoints);
 		}
 	}
 
