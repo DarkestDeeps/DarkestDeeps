@@ -94,13 +94,11 @@ public class Player : Entity {
             defend(true);
             if (Input.GetKeyDown(KeyCode.A))
             {
-                defend(false);
-                dodge(Direction.Left);
+               StartCoroutine(dodge(Direction.Left, enemy.transform));
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                defend(false);
-                dodge(Direction.Right);
+                StartCoroutine(dodge(Direction.Right, enemy.transform));
             }
         }
         else if (Input.GetMouseButton(0))
@@ -111,9 +109,6 @@ public class Player : Entity {
         {
             defend(false);
         }
-
-
-
         intentHandler.checkIntent(anim);
 	}
 

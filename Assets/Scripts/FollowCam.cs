@@ -63,8 +63,8 @@ public class FollowCam : MonoBehaviour {
         Vector3 velocity = Vector3.zero;
         Vector3 relativePos = attackTarget.transform.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(relativePos);
-        Vector3 newPos = attackTarget.transform.position + (-attackTarget.transform.forward * 2.25f);
-        transform.position = Vector3.SmoothDamp(transform.position, newPos, ref velocity, 0.07f);
+        Vector3 newPos = attackTarget.transform.position + (-attackTarget.transform.forward * 4);
+        transform.position = Vector3.SmoothDamp(transform.position, newPos, ref velocity, 0.03f);
         transform.rotation = rotation;
         transform.LookAt(new Vector3(playerTargetSphere.getEnemyPosition().x, attackTarget.transform.position.y, playerTargetSphere.getEnemyPosition().z));
 		

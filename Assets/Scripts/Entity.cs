@@ -2,17 +2,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class Entity : Stats
 {
-
-    public float speed;
-    public float strafeSpeed;
-    public float dashSpeed;
-    public float maxSpeed;
-    public float acceleration;
-    public float deceleration;
-
-    public float healthPoints;
 
     public bool grabbingLedge;
 
@@ -190,22 +181,22 @@ public class Entity : MonoBehaviour
 
     public void takeDamage(float damage)
     {
-        healthPoints = healthPoints - damage;
+        takeHealth(damage);
 
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("React"))
         {
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Defend"))
             {
-                healthPoints = healthPoints - damage;
+                takeHealth(damage);
                 anim.SetTrigger("Hit");
             }
             else
             {
-                healthPoints = healthPoints - (damage / 2);
+                takeHealth(damage / 2);
             }
         }
 
-        if (healthPoints <= 0)
+        if (getHealth() <= 0)
         {
             anim.SetTrigger("Death");
             Destroy(this);
@@ -284,19 +275,29 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void dodge(Direction dir)
+    public IEnumerator dodge(Direction dir, Transform target)
     {
-        if (dir == Direction.Right)
+
+        float currentTime = 0f;
+        float timeToMove = 0.2f;
+
+        while (currentTime < timeToMove)
         {
-            StartCoroutine(moveDistance(transform.right, 1.5f));
+            currentTime += Time.deltaTime;
+            if (dir == Direction.Left)
+            {
+                transform.RotateAround(target.position, transform.up, 180 * Time.deltaTime);
+            }
+            else
+            {
+                transform.RotateAround(target.position, transform.up, -180 * Time.deltaTime);
+            }
+            yield return null;
         }
-        else if (dir == Direction.Left)
-        {
-            StartCoroutine(moveDistance(transform.right, -1.5f));
-        }
+
+        yield break;
     }
 
-    //lol
     public IEnumerator MountLedge()
     {
 
