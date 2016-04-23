@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Stats : MonoBehaviour {
 
+    //Stuff
     public float health;
     public float stamina;
 
